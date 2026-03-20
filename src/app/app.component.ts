@@ -1,31 +1,47 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Loan } from './loan';
 import { NavBar } from './navbar/navbar.component'
+import {CreateLoan} from "./createLoan/createLoan.component";
 
 @Component({
   selector: 'app-root',
-  imports: [NavBar],
+  imports: [NavBar, CreateLoan],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class App {
 
   readonly ROOT_URL = 'http://localhost:8080';
+  readonly GET_LOANS = this.ROOT_URL + "/loans";
 
   loans: Loan[] = [];
 
-  constructor() {
-    this.getLoans().then((loans: Loan[]) => {
-      this.loans = loans;
-    });
+  constructor(private http: HttpClient) {
+    this.getLoans();
   };
 
-  async getLoans(): Promise<Loan[]> {
-    console.log("Get loans")
-    const data = await fetch(this.ROOT_URL + "/loans");
-    const json = await data.json() ?? []; 
-    console.log(json)
+  protected getLoans() {
+    this.http.get<Loan[]>(this.GET_LOANS).subscribe((loans: Loan[]) => {
+      this.loans = loans;
+    })
+  }
 
-    return json;
+  protected calculate(loan: Loan) {
+    const url = this.ROOT_URL + "/loans/" + loan.id + "/payment-schedule/calculate";
+    console.log("Calling: " + url)
+
+    this.http.post<Loan>(url, loan)
+        .subscribe((loan) => {
+          console.log('Calculated {} new payments', loan.paymentSchedule.length);
+        });
+
+  }
+
+  protected delete(loan: Loan) {
+    const url = this.ROOT_URL + "/loans/" + loan.id;
+    console.log("Calling: " + url)
+
+    this.http.delete(url).subscribe(() => {});
   }
 }
