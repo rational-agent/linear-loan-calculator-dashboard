@@ -1,6 +1,6 @@
 {
   "name": "angular.dev",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,12 +9,12 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^21.1.0-next",
-    "@angular/compiler": "^21.1.0-next",
-    "@angular/core": "^21.1.0-next",
-    "@angular/forms": "^21.1.0-next",
-    "@angular/platform-browser": "^21.1.0-next",
-    "@angular/router": "^21.1.0-next",
+    "@angular/common": "^21.2.3",
+    "@angular/compiler": "^21.2.3",
+    "@angular/core": "^21.2.3",
+    "@angular/forms": "^21.2.3",
+    "@angular/platform-browser": "^21.2.3",
+    "@angular/router": "^21.2.3",
     "bootstrap": "^5.3.8",
     "postcss": "^8.5.6",
     "rxjs": "~7.8.0",
@@ -22,9 +22,9 @@
     "zone.js": "~0.16.0"
   },
   "devDependencies": {
-    "@angular/build": "^21.1.0-next",
-    "@angular/cli": "^21.1.0-next",
-    "@angular/compiler-cli": "^21.1.0-next",
+    "@angular/build": "^21.2.3",
+    "@angular/cli": "^21.2.3",
+    "@angular/compiler-cli": "^21.2.3",
     "@types/node": "^16.11.35",
     "typescript": "~5.9.2"
   }
