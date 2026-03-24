@@ -1,47 +1,13 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Loan } from './loan';
-import { NavBar } from './navbar/navbar.component'
-import {CreateLoan} from "./createLoan/createLoan.component";
+import { TopBar } from 'src/app/top-bar/top-bar.component'
+import { LoanOverview } from "src/app/loan-overview/loan-overview.component";
 
 @Component({
   selector: 'app-root',
-  imports: [NavBar, CreateLoan],
+  imports: [TopBar, LoanOverview],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class App {
 
-  readonly ROOT_URL = 'http://localhost:8080';
-  readonly GET_LOANS = this.ROOT_URL + "/loans";
-
-  loans: Loan[] = [];
-
-  constructor(private http: HttpClient) {
-    this.getLoans();
-  };
-
-  protected getLoans() {
-    this.http.get<Loan[]>(this.GET_LOANS).subscribe((loans: Loan[]) => {
-      this.loans = loans;
-    })
-  }
-
-  protected calculate(loan: Loan) {
-    const url = this.ROOT_URL + "/loans/" + loan.id + "/payment-schedule/calculate";
-    console.log("Calling: " + url)
-
-    this.http.post<Loan>(url, loan)
-        .subscribe((loan) => {
-          console.log('Calculated {} new payments', loan.paymentSchedule.length);
-        });
-
-  }
-
-  protected delete(loan: Loan) {
-    const url = this.ROOT_URL + "/loans/" + loan.id;
-    console.log("Calling: " + url)
-
-    this.http.delete(url).subscribe(() => {});
-  }
 }

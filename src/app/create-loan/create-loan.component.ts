@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, NgForm } from "@angular/forms";
-import { Loan } from "../loan";
+import { Loan } from "../model/loan";
 import { App } from "../app.component";
 
 @Component({
     selector: 'createLoan',
     imports: [FormsModule],
-    templateUrl: './createLoan.component.html',
-    styleUrls: ['./createLoan.component.css'],
+    templateUrl: './create-loan.component.html',
+    styleUrls: ['./create-loan.component.css'],
 })
 export class CreateLoan {
 
