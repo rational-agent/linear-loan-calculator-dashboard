@@ -7,5 +7,4 @@ export interface Loan {
     principal: number;
     interestRate: number;
     paymentSchedule: Payment[];
-
 }

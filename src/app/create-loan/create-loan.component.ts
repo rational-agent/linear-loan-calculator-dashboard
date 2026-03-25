@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule, NgForm } from "@angular/forms";
-import { Loan } from "../model/loan";
-import { App } from "../app.component";
+import {CreateLoanDto} from "../loan-api/create-loan-dto";
+import {LoanApiService} from "../loan-api/loan-api.service";
 
 @Component({
     selector: 'createLoan',
@@ -12,12 +11,10 @@ import { App } from "../app.component";
 })
 export class CreateLoan {
 
-    readonly ROOT_URL = 'http://localhost:8080';
-
-    constructor(private http: HttpClient, private app: App) {}
+    constructor(private apiService: LoanApiService) {}
 
     insertLoan(loanForm: NgForm) {
-        const data = {
+        const dto: CreateLoanDto = {
             principal: loanForm.value.principal,
             interestRate: loanForm.value.interestRate,
             startDate: loanForm.value.startDate,
@@ -25,11 +22,7 @@ export class CreateLoan {
             payDay: 25
         };
 
-        this.http.post<Loan>(this.ROOT_URL + "/loans", data)
-            .subscribe((loan) => {
-                console.log('New loan created:', loan.id);
-            });
-
+        this.apiService.createLoan(dto);
     }
 
 
