@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Loan } from 'src/app/model/loan';
-import {LoanApiService} from "../loan-api/loan-api.service";
+import { LoanApiService } from "../loan-api/loan-api.service";
 
 @Component({
     selector: 'loan-overview',
@@ -17,14 +17,16 @@ export class LoanOverview {
     }
 
     public getLoans() {
-        this.loans = this.apiService.getLoans();
+        this.loans = this.apiService.refreshLoans();
     }
 
     protected calculate(loan: Loan) {
         this.apiService.calculate(loan);
+        this.getLoans();
     }
 
     protected delete(loan: Loan) {
         this.apiService.deleteLoan(loan.id)
+        this.getLoans();
     }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
-import {CreateLoanDto} from "../loan-api/create-loan-dto";
-import {LoanApiService} from "../loan-api/loan-api.service";
+import { CreateLoanDto } from "../loan-api/create-loan-dto";
+import { LoanApiService } from "../loan-api/loan-api.service";
 
 @Component({
     selector: 'createLoan',

@@ -11,20 +11,24 @@ export class LoanApiService {
 
     private readonly baseUrl = 'http://localhost:8080/loans';
 
-    constructor(private http: HttpClient) {}
+    private loans: Loan[] = [];
 
-    getLoans(): Loan[] {
-        let loans: Loan[] = [];
+    constructor(private http: HttpClient) {
+    }
 
+    refreshLoans(): Loan[] {
         this.http.get<Loan[]>(this.baseUrl).subscribe({
-            next: value => loans = value,
+            next: value => {
+                this.loans.length = 0;
+                value.forEach(loan => this.loans.push(loan))
+            },
             error: err => console.error(err),
             complete: () => console.log('Done')
-        }).unsubscribe();
+        });
 
-        console.log("Retrieved loans: ", loans.length)
+        console.log("Retrieved loans: ", this.loans.length)
 
-        return loans;
+        return this.loans;
     }
 
     getLoanById(id: number) {
@@ -33,21 +37,32 @@ export class LoanApiService {
 
     createLoan(dto: CreateLoanDto) {
         this.http.post<Loan>(this.baseUrl, dto)
-            .subscribe((loan) => {
-                console.log('New loan created:', loan.id);
-            });
+            .subscribe({
+                next: loan => { console.log("Creating new loan with id: " + loan.id) },
+                error: err => console.error(err),
+                complete: () => console.log('New loan created')
+            }).unsubscribe();
     }
 
     calculate(loan: Loan) {
         const url = `${this.baseUrl}/${loan.id}/payment-schedule/calculate`;
 
-        this.http.post<Loan>(url, loan).subscribe(createdLoan => {
-            console.log("Created loan id: {}", createdLoan)
-        });
+        this.http.post<Loan>(url, loan)
+            .subscribe({
+                next: loan => console.log("Calculating payments for loan with id: " + loan.id),
+                error: err => console.error(err),
+                complete: () => console.log('Payments calculated')
+            }).unsubscribe();
     }
 
     deleteLoan(id: number) {
-        return this.http.delete<Loan>(`${this.baseUrl}/${id}`).pipe()
+        this.http.delete<Boolean>(`${this.baseUrl}/${id}`)
+            .subscribe({
+                next: deleted => console.log("Deleting new loan with id: " + id),
+                error: err => console.error(err),
+                complete: () => console.log('Loan deleted')
+            }).unsubscribe();
+        return id;
     }
 
 }
