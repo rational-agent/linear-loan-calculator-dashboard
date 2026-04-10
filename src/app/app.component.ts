@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { TopBar } from 'src/app/top-bar/top-bar.component'
+import { RouterModule } from "@angular/router";
+import { NavBar } from './nav-bar/nav-bar.component'
 import { CreateLoan } from "./create-loan/create-loan.component";
-import { LoanOverview } from "src/app/loan-overview/loan-overview.component";
+import { LoanOverview } from "./loan-overview/loan-overview.component";
 
 @Component({
   selector: 'app-root',
-  imports: [TopBar, CreateLoan, LoanOverview],
+  imports: [NavBar, CreateLoan, LoanOverview, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

@@ -21,7 +21,7 @@ export class LoanApiService {
                     console.log("Creating new loan with id: " + loan.id)
                 },
                 error: err => console.error(err),
-                complete: () => console.log('New loan created')
+                complete: () => alert('New loan created')
             });
     }
 

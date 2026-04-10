@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Loan } from 'src/app/model/loan';
-import { LoanApiService } from "../loan-api/loan-api.service";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: 'loan-overview',
-    imports: [ ],
+    imports: [ FormsModule ],
     templateUrl: './loan-overview.component.html',
     styleUrls: ['./loan-overview.component.css'],
 })
@@ -21,16 +21,19 @@ export class LoanOverview {
 
     public getLoans() {
         this.http.get<Loan[]>(this.baseUrl).subscribe({
-            next: value => {
-                console.log("Retrieving loans: ", value.length)
-                this.loans.length = 0;
-                value.forEach(loan => this.loans.push(loan))
-            },
+            next: retrievedLoans => this.resetLoans(retrievedLoans),
             error: err => console.error(err),
             complete: () => {
-                console.log("Retrieved loans: ", this.loans.length)
+                alert("Retrieved loans: " + this.loans.length)
             }
         });
+    }
+
+    private resetLoans(newLoans: Loan[]) {
+        console.log("Retrieving loans: ", newLoans.length)
+        this.loans.length = 0;
+        newLoans.forEach(loan => this.loans.push(loan))
+        
     }
 
     protected calculate(loan: Loan) {
@@ -53,7 +56,7 @@ export class LoanOverview {
             .subscribe({
                 next: () => console.log("Deleting new loan with id: " + loan.id),
                 error: err => console.error(err),
-                complete: () => console.log('Loan deleted')
+                complete: () => alert('Loan deleted')
             })
 
         this.getLoans();
