@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Loan } from 'src/app/model/loan';
+import { Loan } from 'src/app/core/model/loan';
 import { HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 

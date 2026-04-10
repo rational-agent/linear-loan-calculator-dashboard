@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from "@angular/router";
-import { NavBar } from './nav-bar/nav-bar.component'
-import { FooterComponent } from "./footer/footer.component";
+import { Header } from './layout/header/header.component'
+import { FooterComponent } from "./layout/footer/footer.component";
 
 @Component({
   selector: 'app-root',
-  imports: [NavBar, RouterModule, FooterComponent],
+  imports: [Header, RouterModule, FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

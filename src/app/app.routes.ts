@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
-import {CreateLoan} from "./create-loan/create-loan.component";
-import {LoanOverview} from "./loan-overview/loan-overview.component";
+import {CreateLoan} from "./features/create-loan/create-loan.component";
+import {LoanOverview} from "./features/loan-overview/loan-overview.component";
 
 const routeConfig: Routes = [
     {

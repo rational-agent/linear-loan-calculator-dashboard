@@ -1,4 +1,4 @@
-import {Loan} from "../model/loan";
+import {Loan} from "../../model/loan";
 import {HttpClient} from "@angular/common/http";
 import {CreateLoanDto} from "./create-loan-dto";
 import {Injectable} from "@angular/core";
