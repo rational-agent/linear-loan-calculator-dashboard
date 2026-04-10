@@ -5,7 +5,7 @@
 import {bootstrapApplication, provideProtractorTestingSupport} from '@angular/platform-browser';
 import {provideRouter} from "@angular/router";
 import {App} from './app/app.component';
-import routeConfig from "./app/routes";
+import routeConfig from "./app/app.routes";
 
 bootstrapApplication(App, {
     providers: [

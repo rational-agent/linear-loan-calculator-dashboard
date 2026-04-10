@@ -17,6 +17,9 @@
             <label class="form-label">Interest rate:</label>
             <input type="number" name="interestRate" class="form-control" ngModel required>
         </div>
-        <button class="btn btn-primary" type="submit" (click)="insertLoan(loginForm)" [disabled]="loginForm.invalid">Create</button>
+        <button class="btn btn-primary" type="submit" (click)="insertLoan(loginForm)"
+                [disabled]="loginForm.invalid">Create
+        </button>
     </form>
 </div>
+

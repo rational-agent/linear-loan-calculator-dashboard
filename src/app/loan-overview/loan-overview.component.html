@@ -1,4 +1,8 @@
-<h1>Loans</h1>
+<h1>Loan overview</h1>
+<button class="btn btn-primary" (click)="getLoans()">Refresh loans</button>
+
+<hr/>
+
 <div class="table-responsive small">
     @for (loan of loans; track loan.id) {
         <button class="btn btn-danger" (click)="delete(loan)">Delete</button>
@@ -45,4 +49,4 @@
         <tr>There are no loans.</tr>
     }
 </div>
-<button class="btn btn-primary" (click)="getLoans()">Get loans</button>
+

@@ -24,7 +24,7 @@ export class LoanOverview {
             next: retrievedLoans => this.resetLoans(retrievedLoans),
             error: err => console.error(err),
             complete: () => {
-                alert("Retrieved loans: " + this.loans.length)
+                console.log("Retrieved loans: " + this.loans.length)
             }
         });
     }
@@ -33,7 +33,7 @@ export class LoanOverview {
         console.log("Retrieving loans: ", newLoans.length)
         this.loans.length = 0;
         newLoans.forEach(loan => this.loans.push(loan))
-        
+
     }
 
     protected calculate(loan: Loan) {
