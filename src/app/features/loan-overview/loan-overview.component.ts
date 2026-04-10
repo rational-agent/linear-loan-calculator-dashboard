@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Loan } from 'src/app/core/model/loan';
 import { HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import {LoanApiService} from "../../core/services/loan-api/loan-api.service";
 
 @Component({
     selector: 'loan-overview',
@@ -15,7 +16,7 @@ export class LoanOverview {
 
     protected loans: Loan[] = [];
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private loanApiService: LoanApiService) {
         this.getLoans();
     }
 
@@ -27,13 +28,6 @@ export class LoanOverview {
                 console.log("Retrieved loans: " + this.loans.length)
             }
         });
-    }
-
-    private resetLoans(newLoans: Loan[]) {
-        console.log("Retrieving loans: ", newLoans.length)
-        this.loans.length = 0;
-        newLoans.forEach(loan => this.loans.push(loan))
-
     }
 
     protected calculate(loan: Loan) {
@@ -60,5 +54,11 @@ export class LoanOverview {
             })
 
         this.getLoans();
+    }
+
+    private resetLoans(newLoans: Loan[]) {
+        console.log("Retrieving loans: ", newLoans.length)
+        this.loans.length = 0;
+        newLoans.forEach(loan => this.loans.push(loan))
     }
 }

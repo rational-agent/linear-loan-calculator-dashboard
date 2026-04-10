@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
-import { CreateLoanDto } from "../../core/services/loan-api/create-loan-dto";
+import { CreateLoanDto } from "../../core/model/create-loan-dto";
 import { LoanApiService } from "../../core/services/loan-api/loan-api.service";
 
 @Component({
@@ -22,7 +22,7 @@ export class CreateLoan {
             payDay: 25
         };
 
-        this.apiService.createLoan(dto);
+        this.apiService.createLoan(dto).then(() => alert("Loan created"));
     }
 
 
