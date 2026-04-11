@@ -1,5 +1,4 @@
 import {Loan} from "../../model/loan";
-import {HttpClient} from "@angular/common/http";
 import {CreateLoanDto} from "../../model/create-loan-dto";
 import {Injectable} from "@angular/core";
 
@@ -11,7 +10,7 @@ export class LoanApiService {
 
     private readonly baseUrl = 'http://localhost:8080/loans';
 
-    constructor(private http: HttpClient) {
+    constructor() {
     }
 
     public async createLoan(dto: CreateLoanDto) {
@@ -27,7 +26,6 @@ export class LoanApiService {
         } catch (error) {
             console.error('Error:', error);
         }
-
     }
 
     public async getLoans(): Promise<Loan[]> {
