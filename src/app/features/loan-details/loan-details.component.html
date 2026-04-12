@@ -1,0 +1,47 @@
+<h3>Loan details for loan #{{loanId}}</h3>
+<button class="btn-primary" (click)="getLoan()">Get loan</button>
+
+<table class="table table-striped table-sm">
+    <thead>
+    <th scope="col">ID</th>
+    <th scope="col">Start Date</th>
+    <th scope="col">End Date</th>
+    <th scope="col">Principal</th>
+    <th scope="col">Interest Rate</th>
+    <th scope="col">Total Interest</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ loan?.id }}</td>
+        <td>{{ loan?.startDate }}</td>
+        <td>{{ loan?.endDate }}</td>
+        <td>{{ loan?.principal }}</td>
+        <td>{{ loan?.interestRate }}</td>
+        <td>{{ loan?.totalInterest }}</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h4>Payment schedule</h4>
+<table class="table table-striped table-sm">
+    <thead>
+    <th scope="col">Payment date</th>
+    <th scope="col">Principal</th>
+    <th scope="col">Interest</th>
+    </thead>
+
+    <tbody>
+        @for (payment of loan?.paymentSchedule; track payment.paymentDate) {
+            <tr>
+                <td>{{ payment.paymentDate }}</td>
+                <td>{{ payment.principalPayment }}</td>
+                <td>{{ payment.interestPayment }}</td>
+            </tr>
+        } @empty {
+            <tr>
+                <button class="btn btn-info" (click)="calculate()">Calculate</button>
+            </tr>
+        }
+    </tbody>
+</table>

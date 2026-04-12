@@ -33,6 +33,12 @@ export class LoanApiService {
         return await data.json() ?? [];
     }
 
+    public async getLoan(id: Number): Promise<Loan> {
+        const url = `${this.baseUrl}/${id}`
+        const data = await fetch(url);
+        return await data.json() ?? undefined;
+    }
+
     public async calculate(loan: Loan) {
         const url = `${this.baseUrl}/${loan.id}/payment-schedule/calculate`;
 

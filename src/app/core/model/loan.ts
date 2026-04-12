@@ -6,5 +6,6 @@ export interface Loan {
     endDate: Date;
     principal: number;
     interestRate: number;
+    totalInterest: number;
     paymentSchedule: Payment[];
 }

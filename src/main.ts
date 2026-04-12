@@ -9,6 +9,7 @@ import routeConfig from "./app/app.routes";
 
 bootstrapApplication(App, {
     providers: [
-        provideProtractorTestingSupport(), provideRouter(routeConfig)]}).catch((err) =>
-  console.error(err),
+        provideProtractorTestingSupport(),
+        provideRouter(routeConfig)]
+}).catch((err) => console.error(err),
 )
