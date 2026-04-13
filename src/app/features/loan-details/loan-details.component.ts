@@ -14,9 +14,7 @@ export class LoanDetails {
     loanId = 0
     loan: Loan | undefined
 
-    constructor(private loanApiService: LoanService,
-                private route: ActivatedRoute,
-                private ref: ChangeDetectorRef) {
+    constructor(private loanApiService: LoanService, private route: ActivatedRoute, private ref: ChangeDetectorRef) {
         this.loanId = Number(this.route.snapshot.params['id'])
         this.getLoan()
     }
