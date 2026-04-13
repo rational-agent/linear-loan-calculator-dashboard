@@ -22,9 +22,10 @@ export class LoanDetails {
     }
 
     protected calculate() {
-        if(this.loan !== undefined) {
-            this.loanApiService.calculate(this.loan).then(() => alert("Calculation finished"))
-            this.getLoan();
+        if (this.loan !== undefined) {
+            this.loanApiService.calculate(this.loan)
+                .then(() => alert("Calculation finished"))
+                .finally(() => this.getLoan())
         }
     }
 
