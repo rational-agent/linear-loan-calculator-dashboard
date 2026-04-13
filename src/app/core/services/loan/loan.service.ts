@@ -1,8 +1,7 @@
 import {Loan} from "../../model/loan";
 import {CreateLoanDto} from "../../model/create-loan-dto";
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 
 @Injectable({
@@ -10,16 +9,16 @@ import {HttpClient} from "@angular/common/http";
 })
 export class LoanService {
 
-    private readonly baseUrl = 'http://localhost:8080/loans';
+    private readonly baseUrl = environment.apiUrl;
 
-    constructor(private http: HttpClient) {
+    constructor() {
     }
 
     public async createLoan(dto: CreateLoanDto) {
         try {
             const response = await fetch(this.baseUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(dto)
             });
 
@@ -28,10 +27,6 @@ export class LoanService {
         } catch (error) {
             console.error('Error:', error);
         }
-    }
-
-    public getLoansObservable(): Observable<Loan[]> {
-        return this.http.get<Loan[]>(this.baseUrl);
     }
 
     public async getLoans(): Promise<Loan[]> {
@@ -51,7 +46,7 @@ export class LoanService {
         try {
             const response = await fetch(url, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(loan)
             });
 
@@ -68,7 +63,7 @@ export class LoanService {
         try {
             const response = await fetch(url, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(loan)
             });
 
