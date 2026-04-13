@@ -1,16 +1,18 @@
 import {Loan} from "../../model/loan";
 import {CreateLoanDto} from "../../model/create-loan-dto";
 import {Injectable} from "@angular/core";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class LoanApiService {
+export class LoanService {
 
     private readonly baseUrl = 'http://localhost:8080/loans';
 
-    constructor() {
+    constructor(private http: HttpClient) {
     }
 
     public async createLoan(dto: CreateLoanDto) {
@@ -26,6 +28,10 @@ export class LoanApiService {
         } catch (error) {
             console.error('Error:', error);
         }
+    }
+
+    public getLoansObservable(): Observable<Loan[]> {
+        return this.http.get<Loan[]>(this.baseUrl);
     }
 
     public async getLoans(): Promise<Loan[]> {

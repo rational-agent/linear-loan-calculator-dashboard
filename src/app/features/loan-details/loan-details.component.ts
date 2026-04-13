@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {Loan} from 'src/app/core/model/loan';
 import {FormsModule} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {LoanApiService} from "../../core/services/loan-api/loan-api.service";
+import {LoanService} from "../../core/services/loan/loan.service";
 
 @Component({
     selector: 'loan-details',
@@ -14,7 +14,9 @@ export class LoanDetails {
     loanId = 0
     loan: Loan | undefined
 
-    constructor(private loanApiService: LoanApiService, private route: ActivatedRoute) {
+    constructor(private loanApiService: LoanService,
+                private route: ActivatedRoute,
+                private ref: ChangeDetectorRef) {
         this.loanId = Number(this.route.snapshot.params['id'])
         this.getLoan()
     }
@@ -26,10 +28,10 @@ export class LoanDetails {
         }
     }
 
-    protected getLoan() {
+    private getLoan() {
         this.loanApiService.getLoan(this.loanId)
             .then(loan => this.loan = loan)
-            .finally(() => console.log("Loan {} retrieved", this.loanId))
+            .finally(() => this.ref.detectChanges());
     }
 
 }

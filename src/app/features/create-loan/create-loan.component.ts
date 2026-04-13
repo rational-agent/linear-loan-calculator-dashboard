@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
 import { CreateLoanDto } from "../../core/model/create-loan-dto";
-import { LoanApiService } from "../../core/services/loan-api/loan-api.service";
+import { LoanService } from "../../core/services/loan/loan.service";
 
 @Component({
     selector: 'createLoan',
@@ -11,7 +11,7 @@ import { LoanApiService } from "../../core/services/loan-api/loan-api.service";
 })
 export class CreateLoan {
 
-    constructor(private apiService: LoanApiService) {}
+    constructor(private apiService: LoanService) {}
 
     insertLoan(loanForm: NgForm) {
         const dto: CreateLoanDto = {
