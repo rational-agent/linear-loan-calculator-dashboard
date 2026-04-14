@@ -23,7 +23,10 @@ export class CreateLoan {
             payDay: 25
         };
 
-        this.apiService.createLoan(dto).then(() => this.alertService.show("Loan created"));
+        this.apiService.createLoan(dto).then(() => {
+            this.alertService.show("Loan created");
+            loanForm.resetForm();
+        });
     }
 
 
