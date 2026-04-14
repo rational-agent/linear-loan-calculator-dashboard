@@ -3,6 +3,7 @@ import {Loan} from 'src/app/core/model/loan';
 import {FormsModule} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {LoanService} from "../../core/services/loan/loan.service";
+import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
     selector: 'loan-details',
@@ -14,7 +15,7 @@ export class LoanDetails {
     loanId = 0
     loan: Loan | undefined
 
-    constructor(private loanApiService: LoanService, private route: ActivatedRoute, private ref: ChangeDetectorRef) {
+    constructor(private loanApiService: LoanService, private route: ActivatedRoute, private ref: ChangeDetectorRef, private alertService: AlertService) {
         this.loanId = Number(this.route.snapshot.params['id'])
         this.getLoan()
     }
@@ -22,7 +23,7 @@ export class LoanDetails {
     protected calculate() {
         if (this.loan !== undefined) {
             this.loanApiService.calculate(this.loan)
-                .then(() => alert("Calculation finished"))
+                .then(() => this.alertService.show("Calculation finished"))
                 .finally(() => this.getLoan())
         }
     }
