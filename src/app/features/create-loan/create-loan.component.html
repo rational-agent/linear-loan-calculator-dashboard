@@ -18,7 +18,13 @@
             <input type="number" name="interestRate" class="form-control" ngModel required>
         </div>
         <button class="btn btn-primary" type="submit" (click)="insertLoan(loginForm)"
-                [disabled]="loginForm.invalid">Create
+                [disabled]="loginForm.invalid || loading">
+            @if (loading) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Creating...
+            } @else {
+                Create
+            }
         </button>
     </form>
 </div>

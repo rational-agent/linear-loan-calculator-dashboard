@@ -11,10 +11,12 @@ import {AlertService} from "../../shared/services/alert.service";
     styleUrls: ['./create-loan.component.css'],
 })
 export class CreateLoan {
+    loading = false;
 
     constructor(private apiService: LoanService, private alertService: AlertService) {}
 
     insertLoan(loanForm: NgForm) {
+        this.loading = true;
         const dto: CreateLoanDto = {
             principal: loanForm.value.principal,
             interestRate: loanForm.value.interestRate,
@@ -26,6 +28,8 @@ export class CreateLoan {
         this.apiService.createLoan(dto).then(() => {
             this.alertService.show("Loan created");
             loanForm.resetForm();
+        }).finally(() => {
+            this.loading = false;
         });
     }
 
