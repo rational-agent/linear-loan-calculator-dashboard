@@ -25,9 +25,10 @@ export class LoanDetails {
         if (this.loan !== undefined) {
             this.calculating = true;
             this.loanApiService.calculate(this.loan)
-                .then(() => this.alertService.show("Calculation finished"))
+                .then(loan => this.loan = loan)
                 .then(() => this.calculating = false)
-                .finally(() => this.getLoan())
+                .then(() => this.alertService.show("Calculation finished"))
+                .finally(() => this.ref.detectChanges());
         }
     }
 

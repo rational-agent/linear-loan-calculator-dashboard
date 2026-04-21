@@ -40,7 +40,7 @@ export class LoanService {
         return await data.json() ?? undefined;
     }
 
-    public async calculate(loan: Loan) {
+    public async calculate(loan: Loan): Promise<Loan> {
         const url = `${this.baseUrl}/${loan.id}/payment-schedule/calculate`;
 
         try {
@@ -50,10 +50,10 @@ export class LoanService {
                 body: JSON.stringify(loan)
             });
 
-            const data: Loan = await response.json();
-            console.log(data);
+            return await response.json() ?? undefined;
         } catch (error) {
             console.error('Error:', error);
+            return loan;
         }
     }
 
