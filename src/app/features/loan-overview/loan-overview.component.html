@@ -1,33 +1,37 @@
 <h1>Loan overview</h1>
 
 <div class="table-responsive small">
-    @for (loan of loans; track loan.id) {
-        <table class="table table-striped table-sm">
-            <thead>
-            <th scope="col">ID</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Principal</th>
-            <th scope="col">Interest Rate</th>
-            <th scope="col">Total Interest</th>
-            </thead>
-            <tbody>
-            <tr>
-                <td>{{ loan.id }}</td>
-                <td>{{ loan.startDate }}</td>
-                <td>{{ loan.endDate }}</td>
-                <td>{{ loan.principal }}</td>
-                <td>{{ loan.interestRate }}</td>
-                <td>{{ loan.totalInterest }}</td>
-                <a class="btn btn-sm btn-primary" [routerLink]="['/loan-details', loan.id]">Select</a>
+    @if (loading) {
+        <span class="spinner-border spinner-border-sm me-2"></span>
+    } @else {
+        @for (loan of loans; track loan.id) {
+            <table class="table table-striped table-sm">
+                <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Principal</th>
+                <th scope="col">Interest Rate</th>
+                <th scope="col">Total Interest</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ loan.id }}</td>
+                    <td>{{ loan.startDate }}</td>
+                    <td>{{ loan.endDate }}</td>
+                    <td>{{ loan.principal }}</td>
+                    <td>{{ loan.interestRate }}</td>
+                    <td>{{ loan.totalInterest }}</td>
+                    <a class="btn btn-sm btn-primary" [routerLink]="['/loan-details', loan.id]">Select</a>
 
-                <button class="btn btn-sm btn-danger" (click)="delete(loan)">Delete</button>
-            </tr>
+                    <button class="btn btn-sm btn-danger" (click)="delete(loan)">Delete</button>
+                </tr>
 
-            </tbody>
-        </table>
-    } @empty {
-        <tr>There are no loans.</tr>
+                </tbody>
+            </table>
+        } @empty {
+            <tr>There are no loans.</tr>
+        }
     }
 </div>
 

@@ -14,6 +14,7 @@ import {AlertService} from "../../shared/services/alert.service";
 export class LoanDetails {
     loanId = 0
     loan: Loan | undefined
+    calculating = false;
 
     constructor(private loanApiService: LoanService, private route: ActivatedRoute, private ref: ChangeDetectorRef, private alertService: AlertService) {
         this.loanId = Number(this.route.snapshot.params['id'])
@@ -22,8 +23,10 @@ export class LoanDetails {
 
     protected calculate() {
         if (this.loan !== undefined) {
+            this.calculating = true;
             this.loanApiService.calculate(this.loan)
                 .then(() => this.alertService.show("Calculation finished"))
+                .then(() => this.calculating = false)
                 .finally(() => this.getLoan())
         }
     }

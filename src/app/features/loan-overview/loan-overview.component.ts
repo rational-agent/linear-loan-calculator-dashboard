@@ -13,6 +13,8 @@ import {RouterLink} from "@angular/router";
 })
 export class LoanOverview {
 
+    loading = false;
+
     protected loans: Loan[] = [];
 
     constructor(private loanService: LoanService, private ref: ChangeDetectorRef) {
@@ -20,9 +22,13 @@ export class LoanOverview {
     }
 
     protected getLoans() {
+        this.loading = true;
         this.loanService.getLoans()
             .then((loans: Loan[]) => this.loans = loans)
-            .finally(() => this.ref.detectChanges());
+            .finally(() => {
+                this.loading = false
+                this.ref.detectChanges()
+            });
     }
 
     protected delete(loan: Loan) {
