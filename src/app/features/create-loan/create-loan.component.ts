@@ -32,6 +32,4 @@ export class CreateLoan {
             this.loading = false;
         });
     }
-
-
 }
